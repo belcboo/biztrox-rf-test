@@ -1,171 +1,287 @@
+/* 2. Navigation */
 .top-header {
-  font-size: 12px;
-  transition: transform .2s ease;
-  transform-origin: top;
-  font-weight: 600;
+  background: $secondary-color;
 
-  &.hide {
-    transform: scaleY(0);
-    transform-origin: top;
+  ul {
+    @include mobile {
+      text-align: center;
+    }
+
+    li {
+      margin: 15px 0;
+
+      @include mobile {
+        margin: 10px 0;
+      }
+
+      a {
+        display: inline-block;
+        padding: 0 20px;
+        border-right: 1px solid $border-color;
+        color: #bcbcbd;
+
+        @include mobile {
+          border: 0;
+        }
+
+        span {
+          color: $primary-color;
+        }
+      }
+
+      &:last-child {
+        a {
+          padding-right: 0;
+          border-right: 0;
+        }
+      }
+    }
   }
 }
 
 .navigation {
-  background: linear-gradient(to right, transparent 50%, $primary-color 50%);
-  transition: .2s ease;
+  .navbar {
+    padding: 0;
+    background: $white !important;
+    position: relative;
 
-  @include desktop {
-    background: $secondary-color;
-
-    .navbar-brand {
-      padding: 12px 0;
-    }
-  }
-}
-
-.navbar-collapse{
-  @include desktop {
-    background: $secondary-color;
-  }
-}
-
-.navbar-nav {
-  padding-left: 50px;
-  background: $primary-color;
-
-  @include desktop {
-    padding-left: 0;
-    background: $secondary-color;
-  }
-}
-
-.nav-bg {
-  background-color: $secondary-color;
-}
-
-.nav-item {
-  .nav-link {
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  margin: 0 15px;
-  position: relative;
-
-  &::before {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 6px;
-    width: 100%;
-    content: "";
-    background: $white;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform .3s ease;
-  }
-
-  &:hover,
-  &.active {
-    &::before {
-      transform: scaleY(1);
-      transform-origin: bottom;
-    }
-  }
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: $white;
-}
-
-link:focus,
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: $white;
-}
-
-.navbar-dark .navbar-nav .active>.nav-link,
-.navbar-dark .navbar-nav .nav-link.active,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .show>.nav-link {
-  color: $white;
-}
-
-.navbar-expand-lg .navbar-nav .nav-link {
-  padding: 40px 0px;
-
-  @include desktop {
-    padding: 20px;
-  }
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-  background: $white;
-  box-shadow: 0 2px 5px #0000000d;
-}
-
-.navbar {
-  .dropdown {
-    &:hover {
-      .dropdown-menu {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    &-menu {
-      box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
-      border-bottom: 5px solid $primary-color;
-      padding: 15px;
-      top: 96px;
-      border-radius: 0;
-      display: block;
-      visibility: hidden;
-      transition: .3s ease;
-      opacity: 0;
-      transform: translateY(20px);
+    &-brand {
+      position: absolute;
+      left: 0;
+      top: -52px;
+      height: 170px;
+      width: 220px;
       background: $white;
+      text-align: center;
+      box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+      z-index: 9;
 
       @include desktop {
-        display: none;
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transform-origin: unset;
+        position: relative;
+        height: unset;
+        width: unset;
+        box-shadow: none;
+        top: 24px;
+        background: none;
+
+        img {
+          height: 50px;
+          width: auto;
+        }
       }
 
-      &.show {
-        visibility: hidden;
+      img {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .nav-item {
+      padding: 28px 0;
+
+      @include desktop {
+        padding: 0;
+      }
+
+      .nav-link {
+        padding: 15px 10px;
+        font-family: $primary-font;
+        font-weight: 600;
+        color: $text-color-dark;
+        text-transform: uppercase;
+        transition: .2s ease;
+        font-size: 14px;
+
+        @include desktop-lg {
+          font-size: 12px;
+          padding: 15px 6px;
+        }
 
         @include desktop {
-          visibility: visible;
-          display: block;
+          padding: 15px 0;
+          font-size: 14px;
+          text-align: center;
+        }
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+
+      &.nav-button {
+        padding: 28px 0 28px 30px;
+
+        @include desktop {
+          padding: 0;
+          margin-bottom: 20px;
+        }
+
+        .nav-link {
+          color: $white;
+
+          &.pgactive {
+            color: $primary-color;
+          }
+        }
+      }
+
+      &.active {
+        .nav-link {
+          color: $primary-color;
         }
       }
     }
 
-    &-item {
-      position: relative;
-      color: $text-color-dark;
-      transition: .2s ease;
-      text-transform: capitalize;
-      font-family: $primary-font;
-
-      @include desktop {
-        text-align: center;
-      }
-
-      &:not(:last-child) {
-        margin-bottom: 10px;
-      }
-
+    .dropdown {
       &:hover {
-        color: $primary-color;
-        background: transparent;
+        .dropdown-menu {
+          visibility: visible;
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
+
+      &-menu {
+        box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
+        padding: 40px 30px;
+        border: 0;
+        border-radius: 0;
+        top: 80%;
+        left: -20px;
+        display: block;
+        visibility: hidden;
+        transition: .3s ease;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+
+        @include desktop {
+          display: none;
+          opacity: 1;
+          visibility: visible;
+          transform: scaleY(1);
+          transform-origin: unset;
+        }
+
+        &.show {
+          visibility: visible;
+          opacity: 1;
+          transform: scaleY(1);
+
+          @include desktop {
+            display: block;
+          }
+        }
+      }
+
+      &-item {
+        position: relative;
+        color: #848484;
+        transition: .2s ease;
+
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+          background: transparent;
+        }
+
+        &::before {
+          position: absolute;
+          content: '';
+          left: 5px;
+          top: 12px;
+          height: 4px;
+          width: 4px;
+          border-radius: 50%;
+          background: #848484;
+          border: 1px solid $white;
+          display: inline-block;
+          box-shadow: 0 0 0 2px #848484;
+        }
+
+        @include desktop {
+          text-align: center;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 2.3. Search Form */
+.search-form {
+  padding: 230px 0;
+  background: $secondary-color;
+  position: absolute;
+  width: 100%;
+  top: -800px;
+  z-index: 10;
+  transition: .3s ease-in;
+
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: $white;
+
+    i {
+      transition: .3s ease;
+      display: inline-block;
+    }
+
+    &:hover {
+      i {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &.open {
+    top: 0;
+  }
+
+  .form-control {
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: 0;
+    font-size: 20px;
+    transition: .3s ease;
+    position: relative;
+    color: $white;
+    height: 130px;
+    padding: 30px 40px;
+  }
+
+  h3 {
+    font-size: 35px;
+    color: $white;
+    margin-bottom: 35px;
+  }
+
+  .input-wrapper {
+    position: relative;
+
+    button {
+      background: none;
+      border: 0;
+      position: absolute;
+      font-size: 20px;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      padding: 20px;
+
+      i {
+        color: $white;
       }
     }
   }

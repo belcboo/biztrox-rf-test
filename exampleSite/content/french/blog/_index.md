@@ -1,8 +1,6 @@
 ---
-title: "Dernières nouvelles"
-draft: false
-# page title background image
-bg_image: "images/backgrounds/page-title.jpg"
-# meta description
-description : "ceci est une description meta"
+title: "Blog"
+date: 2018-07-12T18:19:33+06:00
+bg_image: images/background/page-title.jpg
+description : "This is meta description"
 ---

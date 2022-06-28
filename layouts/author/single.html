@@ -1,20 +1,22 @@
 {{ define "main" }}
 
-<section class="section bg-light">
+{{ partial "page-header.html" . }}
+
+<section class="section pb-0">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-10 mx-auto">
 				<div class="text-center">
 					<figure>
-						{{ if .Params.image }}
-						<img class="rounded-circle img-fluid mb-4" src="{{.Params.image | relURL }}">
+						{{ if .Params.Image }}
+						<img class="rounded-circle img-fluid" src="{{.Params.Image }}">
 						{{else if .Params.Email}}
-						<img class="rounded-circle img-fluid mb-4" src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon">
+						<img class="rounded-circle img-fluid" src="https://www.gravatar.com/avatar/{{ md5 .Params.email }}?s=128&pg&d=identicon">
 						{{ end }}
 						<figcaption>
-							<h4 class="font-weight-bold">
+							<h5 class="font-weight-bold">
 								{{ .Title }}
-							</h4>
+							</h5>
 						</figcaption>
 					</figure>
 					<hr>
@@ -22,7 +24,7 @@
 					<hr>
 					<ul class="list-inline">
 						{{ range .Params.Social }}
-						<li class="list-inline-item"><a href="{{ .link | safeURL }}"><i class="{{ .icon }}"></i></a></li>
+						<li class="list-inline-item"><a class="share-icon bg-secondary" href="{{ .link | safeURL}}"><i class="{{ .icon }}"></i></a></li>
 						{{ end }}
 					</ul>
 				</div>
@@ -36,10 +38,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="title text-center">
-					<h2 class="section-title">{{ i18n "posted_by" }} {{ .Title }}</h2>
+					<h2 class="section-title section-title-border">{{ i18n "posted_by" }} {{ .Title }}</h2>
 				</div>
 			</div>
-			{{ range where site.RegularPages "Params.author" (.Title | title) }}
+			{{ range where site.RegularPages "Params.author" .Title }}
 			<div class="col-lg-4 col-sm-6 mb-4">
 				{{ .Render "post" }}
 			</div>

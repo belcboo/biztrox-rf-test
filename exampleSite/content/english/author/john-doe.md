@@ -1,11 +1,6 @@
 ---
-title: "John doe"
-# page title background image
-bg_image: "images/backgrounds/page-title.jpg"
-# meta description
-description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."
+title: "John Doe"
 email: "email2@example.org"
-# portrait
 image: ""
 social:
   - icon : "ti-facebook" # themify icon pack : https://themify.me/themify-icons

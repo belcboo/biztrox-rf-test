@@ -2,31 +2,23 @@
   <meta charset="utf-8">
   <title>{{ .Title }}</title>
 
-  {{ "<!-- mobile responsive meta -->" | safeHTML }}
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- mobile responsive meta -->
   <meta name="description"
-    content="{{ with .Params.Description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}">
-  {{ with site.Params.author }}
-  <meta name="author" content="{{ . }}">{{ end }}
-  {{ hugo.Generator }}
-  {{ "<!-- multilingual SEO optimizations -->" | safeHTML }}
+    content="{{ with .Description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <!-- multilingual SEO optimizations -->
   {{ if .IsTranslated }}
   {{ range .Page.AllTranslations }}
   <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
   {{ end }}
   {{ end }}
 
-  {{ "<!-- plugins -->" | safeHTML }}
-  {{ range site.Params.plugins.css }}
-  <link rel="stylesheet" href="{{ .link | absURL }}">
+  {{ with .Params.image }}
+  <meta property="og:image" content="{{ . | absURL }}" />
   {{ end }}
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/google_analytics_async.html" . }}
+  {{ site.Params.custom_script | safeHTML }}
 
-  {{ "<!-- Main Stylesheet -->" | safeHTML }}
-  {{ $styles := resources.Get "scss/main.scss" | toCSS | fingerprint "sha512" }}
-  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
-
-  {{ "<!--Favicon-->" | safeHTML }}
-  <link rel="shortcut icon" href="{{ `images/favicon.png` | absURL }}" type="image/x-icon">
-  <link rel="icon" href="{{ `images/favicon.png` | absURL }}" type="image/x-icon">
+  {{ partialCached "style.html" . }}
 
 </head>
